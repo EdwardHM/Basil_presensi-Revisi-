@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- <meta http-equiv="Content-Security-Policy" 
+            content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+            style-src 'self' 'unsafe-inline'; 
+            media-src *; 
+            script-src 'self' 'unsafe-inline';
+            img-src 'self' data: content:;"> -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="layout" content="mobile"/>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Absensi Online</title>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/Style.css">
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <!-- <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> -->
+    </head>
+    
+    <body>
+    
+        <div class="page" style="text-align: center;">
+
+            <img class="text-center" src="img/LOGO-BASIL.png" alt="logo" id="logo" style="width:70px;height:70px;"/>
+            <h6>Sign up for free and experience the dashboard today</h6>
+            <hr/>
+            
+            <form id="formLogin">
+                    <div class="form-group">
+                        <input type="text" name="username" id="username" class="form-control" style="border: none;border-bottom: solid 1px rgba(0,0,0,.3);background:#fafafa;   outline: none !important;"  required>
+                        <label class="form-control-placeholder" for="username"><i class="fa fa-user-circle" style="font-size:20px"> Username</i></label>
+                    </div>
+                    
+                    <br/>
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" class="form-control" style="border: none;border-bottom: solid 1px rgba(0,0,0,.3);background:#fafafa;  outline: none !important;"  required>
+                        <label class="form-control-placeholder" for="password"><i class="fa fa-lock"  style="font-size:20px;"> Password</i></label>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="form-group" style="text-align: center">
+                <button name="sign-in" id="sign-in" class="btn btn-info" onclick=" login()">Sign-In</button>  
+                
+                </br>
+        
+                 <a href="index.html" ><p style="margin-top: 30px">Sign-Up</p></a> 
+            </div> 
+
+     
+        <!-- <a href="triall.html">trial</a> -->
+        </div>
+
+        
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!--script ke API Login-->
+        <!-- <script type="text/javascript" src="js/login.js"></script>   -->
+
+        <script type="text/javascript" src="js/database.js"></script>  
+        <script type="text/javascript" src="js/login.js"></script>  
+
+    </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "BasilPresensi",
+  "short_name": "BasilPresensi",
+  "version": "com.Basil.BasilPresensi",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "author": "Apache Cordova Team",
+  "icons": [],
+  "start_url": "absensi.html"
+}
