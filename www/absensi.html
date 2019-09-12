@@ -30,14 +30,14 @@
 
         <!-- navbar -->
         <div class="topnav" id="myTopnav">
-            <a href="#home" class="active">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <a href="absensi.html" class="active">Home</a>
+            <a href="history.html">History</a>
+            <a href="#">profile</a>
+            <a href="#" onclick="logOut()">Log-Out</a>
+            <a href="javascript:void(0);" class="icon" onclick="responsive()">
               <i class="fa fa-bars"></i>
             </a>
-          </div>
+        </div>
 
           <!-- form input data -->
         <div class="page" style="text-align: center;">
@@ -51,28 +51,61 @@
             </div> -->
 
             <!-- kondisi absensi dari mana -->
-            <div id ="keadaan" style="margin-bottom: 50px">
-                    <h5>Jenis Kondisi Absensi : </h5>
-                        <div class="form-check-inline">
-                            <label class="form-check-label" for="luar">
-                                <input type="radio" class="form-check-input" id="kantor" name="kondisi" onclick="myFunction(this.value)" value="true" checked>
+            <div id ="lokasi" style="margin-bottom: 50px; margin-top: 50px">
+                <h5>Anda Presensi di ? : </h5>
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="luar">
+                        <input type="radio" class="form-check-input" id="kantor" name="kondisi" onclick="myFunction(this.value)" value="true" checked>
                                 <b>Di Kantor</b>
-                            </label>
-                        </div>
+                        </label>
+                    </div>
                         
-                        <div class="form-check-inline">
-                            <label class="form-check-label" for="kantor">
-                                <input type="radio" class="form-check-input" id="luar" name="kondisi" onclick="myFunction(this.value)"  value="false" >
-                                <b>Di Luar Kantor</b>
-                            </label>
-                        </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="kantor">
+                        <input type="radio" class="form-check-input" id="luar" name="kondisi" onclick="myFunction(this.value)"  value="false" >
+                            <b>Di Luar Kantor</b>
+                        </label>
+                    </div>
+                    
+                    <!-- menampung nilai kondisi -->
+                    <input type="hidden" id="tampung">
 
-                        <input type="hidden" id="tampung">
-                           
-                        <div>
-                            <label id ="lok"> </label>
-                        </div>
-                </div>
+                    <div>
+                        <label id ="lok"> </label>
+                        <input type="hidden" id="tampung2">
+                    </div>
+            </div>
+
+
+            <div id ="presensi" style="margin-bottom: 50px;">
+                <h5>Jenis presensi : </h5>
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="luar">
+                        <input type="radio" class="form-check-input" id="hadir" name="kehadiran" onclick="jpresensi(this.value)" value="presensi" checked>
+                                <b>Presensi Kehadiran (dalam kantor)</b>
+                        </label>
+                    </div>
+                
+                </br>
+
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="kantor">
+                        <input type="radio" class="form-check-input" id="izin" name="kehadiran" onclick="jpresensi(this.value)"  value="izin" >
+                            <b>Izin Tidak Masuk (sakit, dll)</b>
+                        </label>
+                    </div>
+   
+                </br>
+
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="kantor">
+                        <input type="radio" class="form-check-input" id="dinas" name="kehadiran" onclick="jpresensi(this.value)"  value="dinas" >
+                            <b>Sedang dinas keluar</b>
+                        </label>
+                    </div>   
+
+                    <input type="hidden" id="tampunghadir">
+            </div>
   
             <!-- Ambil Image / Foto -->
             <div id="absensi"  >
@@ -84,7 +117,6 @@
             <h5>Semua Ok ? </h5>    
             <p><button id="btn" class="button" onclick="finalSend()">OK</button></p>
   
-         
         </div>
 
         
@@ -97,11 +129,11 @@
         <script type="text/javascript" src="js/location.js"></script> 
 
         <!-- script berhubungan data absensi -->
-        <script type="text/javascript" src="js/absen.js"></script> 
+        <script type="text/javascript" src="js/absensi.js"></script> 
 
         <!-- script responsive navbar -->
         <script>
-                function myFunction() {
+                function responsive() {
                   var x = document.getElementById("myTopnav");
                   if (x.className === "topnav") {
                     x.className += " responsive";
@@ -109,7 +141,7 @@
                     x.className = "topnav";
                   }
                 }
-                </script>
+        </script>
        
     </body>
 </html>

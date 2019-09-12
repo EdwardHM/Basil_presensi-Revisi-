@@ -1,4 +1,4 @@
-var mydb = openDatabase("biodata","0.1","biodata peserta workshop", 5*1024*1024);
+var mydb = openDatabase("BasilPresensi","0.1","database untuk basil presensi", 5*1024*1024);
 
 function login()
 {
@@ -8,7 +8,7 @@ function login()
     function matchcred(tx)
     {
         var username=document.getElementById("username").value;
-        tx.executeSql('SELECT * from person Where nama = "'+ username+ '"', [], MatchPass, errorCB1);
+        tx.executeSql('SELECT * from auth_user Where username = "'+ username+ '"', [], MatchPass, errorCB1);
     }
 
 
@@ -24,6 +24,9 @@ function login()
 
         if(orgnalPass==userinputedPass)
         {
+            var uuiduser = results.rows.item(0).uuid; 
+            sessionStorage.setItem('user_uuid', uuiduser) 
+
             window.location.href = "absensi.html";
         }
         else
@@ -34,7 +37,7 @@ function login()
 
     function errorCB(tx,err)
     {
-        alert("Password is not valid !");
+        alert("Username or Password is not valid !");
         document.getElementById("username").value="";
         document.getElementById("password").value="";
     }

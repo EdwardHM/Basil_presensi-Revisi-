@@ -11,18 +11,47 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>History</title>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/Style.css">
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="cordova.js"></script>
     </head>
 
     <body>
+    <!-- navbar -->
+        <div class="topnav" id="myTopnav">
+            <a href="history.html"class="active">History</a>
+            <a href="absensi.html">Home</a>
+            <a href="#">profile</a>
+            <a href="#" onclick="logOut()">Log-Out</a>
+            <a href="javascript:void(0);" class="icon" onclick="responsive()">
+              <i class="fa fa-bars"></i>
+            </a>
+        </div>
+
         <div class="container-fluid">
 
             <h4>Data Yang Telah Diinput</h4>
             <div id="hasil">
-                <button class="btn btn-info" onclick="displayAll()">test</button>
+             
             </div>
         </div>
 
-        <script type="text/javascript" src="js/database.js"></script>
+        <script type="text/javascript" src="js/absensi.js"></script>
+
+        <script>
+                function responsive() {
+                  var x = document.getElementById("myTopnav");
+                  if (x.className === "topnav") {
+                    x.className += " responsive";
+                  } else {
+                    x.className = "topnav";
+                  }
+                }
+        </script>
+       
     </body>
 </html>
