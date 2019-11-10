@@ -7,7 +7,7 @@ function login()
 
     function matchcred(tx)
     {
-        var username=document.getElementById("username").value;
+        var username= document.getElementById("username").value;
         tx.executeSql('SELECT * from auth_user Where username = "'+ username+ '"', [], MatchPass, errorCB1);
     }
 

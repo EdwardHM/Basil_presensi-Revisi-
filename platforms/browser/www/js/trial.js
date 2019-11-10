@@ -1,37 +1,19 @@
-$(document).ready(function(){
-    console.log("ajax ready");
-    $("#trial").click(function(){
+function sendData() {
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost/mahasiswa_API/register.php";
 
-        //mengirimkan data username dan password dan me-return data user beserta jwt token
-        // $.ajax({ 
-        //     url: 'http://127.0.0.1:8888/signin',
-        //     dataType: 'json',
-        //     contentType : "application/json",
-        //     method : 'POST',
-        //     cache: false,
-        //     data: JSON.stringify( { "name": $('#nama').val(),
-        //      "kontak": $('#phone').val(),"status": $('anggota').val(), "password": $('#password').val() } ),
-        //     processData: false,
-
-        //     success : function(result){            
-        //         if(result["status"] == "success"){
-        //          alert("sukses bro")
-        //         } else{
-        //             alert("gagal bro");
-        //         }
-        //     }
-        // });
-
-            $.ajax({
-                type: 'GET',
-                url: "http://192.168.1.6/api_presensi_basil/trial.php",
-                success:function(result){
-                 if(result["status"]  == "success"){
-                    alert("berhasil koneksi dengan api")
-                 } else{
-                     alert("coba lagi");
-                 }
-                }
-            });
+    var data = JSON.stringify({
+        nama: document.getElementById("nama").value,
+        email: document.getElementById("phone").value,
+        password: document.getElementById("password").value,
     });
-});  
+
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onload = function () {               
+        console.log (this.responseText);
+    };
+
+    xhr.send(data);
+    return false;
+}
