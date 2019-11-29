@@ -1,19 +1,45 @@
-function sendData() {
-    var xhr = new XMLHttpRequest();
-    var url = "http://localhost/mahasiswa_API/register.php";
+$(document).ready(function(){
+    console.log("Ajax Register ready");
+    $("#register").click(function(event){
+        // const nama = $('#nama').val();
+        // const phone = $('#phone').val();
+        // const password = $('#password').val();
+        // console.log(nama);
+        // console.log(phone);
+        // console.log(password);
+        event.preventDefault();
+        $.ajax({
+            url: "http://192.168.1.7/API_Basil_Revisi/register.php",
+            type: "POST",
+            datatype:"json",
+            crossDomain: true,
+            data:JSON.stringify( { nama: $('#nama').val(), phone: $('#phone').val(), password: $('#password').val() } ),
+            cache:false,
+            beforeSend: function(){
+                $('#errormessage_reg').html("");
+            },
+            processData:false,
 
-    var data = JSON.stringify({
-        nama: document.getElementById("nama").value,
-        email: document.getElementById("phone").value,
-        password: document.getElementById("password").value,
+
+            success: function(result)
+            {
+                
+    
+                var error = result.error;
+                if(error){
+                    console.log("gagal register");
+                    console.log(result.error_msg);
+                    $('#errormessage_reg').html(result.error_msg);
+                }
+                else{
+                    console.log("berhasil register");
+                    alert("berhasil register");
+                    // lanjut ke halaman berikutnya
+                    window.location.href = "login.html";
+                }
+            }
+        });
+        return false;
     });
+});
 
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.onload = function () {               
-        console.log (this.responseText);
-    };
-
-    xhr.send(data);
-    return false;
-}
