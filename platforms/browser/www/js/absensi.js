@@ -3,6 +3,7 @@ var mydb = openDatabase("BasilPresensi","0.1","database untuk basil presensi", 5
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
+
     displayAll()
 
     //get default kondisi radio button kondisi
@@ -32,76 +33,95 @@ function jpresensi(kehadiran) {
     sessionStorage.setItem('hadir', kehadiran);
   }
 
-
-//generate uuid
-function uuidv4() {
-    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    )
-  }
- 
- //membuat table history 
-if(window.openDatabase){
-    mydb.transaction(function (t){
-        t.executeSql("CREATE TABLE IF NOT EXISTS presensi(id INTEGER PRIMARY KEY ASC, uuid TEXT,uuid_user TEXT, is_in_office TEXT, lokasi TEXT, kondisi TEXT, created_at TEXT)");
-    });
-} else{
-    alert("websql tidak support di browser ini");
-}
-
 function finalSend(){
+    console.log("sdh disini")
     try{
         var is_in_office = sessionStorage.getItem('office'); 
         var radius = sessionStorage.getItem('radius'); 
+        const user = sessionStorage.getItem('user_uuid'); 
+        const hadir = sessionStorage.getItem('hadir');
+        const office = sessionStorage.getItem('office');  
+        const lokasi = sessionStorage.getItem('lokasi')
 
+        // jika di office
         if(is_in_office == "true"){
             if(radius == "ok"){
                 var date = new Date();
                 var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
                 console.log(timeStamp);
 
-                     mydb.transaction(function (tx){
-                        var uuid = uuidv4();
-                        const uuiduser = sessionStorage.getItem('user_uuid'); 
-                        const lokasi = sessionStorage.getItem('lokasi');  
-                        const kehadiran = sessionStorage.getItem('hadir'); 
-                        tx.executeSql("insert into presensi(uuid,uuid_user,is_in_office,lokasi,kondisi,created_at) values(?,?,?,?,?,?)",[uuid,uuiduser,is_in_office,lokasi,kehadiran,timeStamp]);
-                    })
+                $.ajax({
+                    url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
+                    type: "POST",
+                    datatype:"json",
+                    crossDomain: true,
+                    data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi} ),
+                    cache:false,
+                    processData:false,
 
-                alert("Anda berhasil melakukan presensi");  
-
+                    success: function(result)
+                    {
+                        var error = result.error;
+                        if(error){
+                            console.log("gagal menyimpan data");
+                            console.log(result.error_msg);
+                            alert(result.error_msg);
+                        }
+                        else{
+                            console.log("Anda berhasil melakukan presensi");
+                            alert("Anda berhasil melakukan presensi");  
+                        }
+                    }
+                });
             } 
             
             else{
-                alert("Anda Diluar jangkauan 100m dari kantor !");
+                alert("Anda Diluar jangkauan 100m dari kantor! Pilih anda sedang tidak berada di kantor");
                 window.location.href = "absensi.html";
             }
-
         } 
-        
+        // end jika di office
+
+        //jika diluar 
         else{
             if(radius =="nope"){
                 var date = new Date();
                 var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
                 console.log(timeStamp);
 
-                     mydb.transaction(function (tx){
-                        var uuid = uuidv4();
-                        const uuiduser = sessionStorage.getItem('user_uuid'); 
-                        const lokasi = sessionStorage.getItem('lokasi');  
-                        const kehadiran = sessionStorage.getItem('hadir'); 
-                        tx.executeSql("insert into presensi(uuid,uuid_user,is_in_office,lokasi,kondisi,created_at) values(?,?,?,?,?,?)",[uuid,uuiduser,is_in_office,lokasi,kehadiran,timeStamp]);
-                     })
+                $.ajax({
+                    url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
+                    type: "POST",
+                    datatype:"json",
+                    crossDomain: true,
+                    data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi } ),
+                    cache:false,
+                    processData:false,
 
-                alert("Anda berhasil melakukan presensi");  
+                    success: function(result)
+                    {
+                        var error = result.error;
+                        if(error){
+                            console.log("gagal menyimpan data");
+                            console.log(result.error_msg);
+                            alert(result.error_msg);
+                        }
+                        else{
+                            console.log("Anda berhasil melakukan presensi");
+                            alert("Anda berhasil melakukan presensi");  
+                        }
+                    }
+                });
+            } 
 
-            } else{
+            else{
                 alert("Anda masih dalam jangkauan 100m dari kantor, disarankan untuk memilih 'di kantor' ");
                 window.location.href = "absensi.html";
             }
         }
 
-    } catch(err){
+    } 
+    catch(err){
         alert("Gagal menyimpan data !");
     }
         

@@ -2,30 +2,8 @@
  
             function onDeviceReady(){
                 console.log("location ready");
-                navigator.geolocation.getCurrentPosition(onSuccess, onError,{ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
-                
-                // manggil cek mock location
-                // window.plugins.mocklocation.check(successCallback, errorCallback);
+                navigator.geolocation.getCurrentPosition(onSuccess, onError,{ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });               
             }
-
-            //cek ada mock location
-            // function successCallback(result) {
-            //     console.log(result); // true - enabled, false - disabled
-            //     if(result =="false"){
-            //         console.log("mock location disable");
-            //     } else{
-            //         sessionStorage.clear();
-            //         alert("Please turn off / disable the mock location");
-            //         window.location.href = "absensi.html";
-            //     }
-            //   }
-            //   function errorCallback(error) {
-            //     console.log(error);
-            //   }
-       
-            // function getData(){
-            //     navigator.geolocation.getCurrentPosition(onSuccess, onError,{ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
-            // }
 
             function onSuccess(position){
                  var loc = document.getElementById("lok");
