@@ -9,7 +9,7 @@ $(document).ready(function(){
         // console.log(password);
         event.preventDefault();
         $.ajax({
-            url: "http://192.168.1.6/API_Basil_Revisi/register.php",
+            url: "http://192.168.1.2/API_Basil_Revisi/register.php",
             type: "POST",
             datatype:"json",
             crossDomain: true,

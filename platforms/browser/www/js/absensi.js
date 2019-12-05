@@ -46,33 +46,39 @@ function finalSend(){
         // jika di office
         if(is_in_office == "true"){
             if(radius == "ok"){
-                var date = new Date();
-                var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
-                console.log(timeStamp);
+                if(hadir = "presensi"){
+                    var date = new Date();
+                    var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
+                    console.log(timeStamp);
 
-                $.ajax({
-                    url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
-                    type: "POST",
-                    datatype:"json",
-                    crossDomain: true,
-                    data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi} ),
-                    cache:false,
-                    processData:false,
+                    $.ajax({
+                        url: "http://192.168.1.2/API_Basil_Revisi/absensi.php",
+                        type: "POST",
+                        datatype:"json",
+                        crossDomain: true,
+                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi} ),
+                        cache:false,
+                        processData:false,
 
-                    success: function(result)
-                    {
-                        var error = result.error;
-                        if(error){
-                            console.log("gagal menyimpan data");
-                            console.log(result.error_msg);
-                            alert(result.error_msg);
+                        success: function(result)
+                        {
+                            var error = result.error;
+                            if(error){
+                                console.log("gagal menyimpan data");
+                                console.log(result.error_msg);
+                                alert(result.error_msg);
+                            }
+                            else{
+                                console.log("Anda berhasil melakukan presensi");
+                                alert("Anda berhasil melakukan presensi");  
+                            }
                         }
-                        else{
-                            console.log("Anda berhasil melakukan presensi");
-                            alert("Anda berhasil melakukan presensi");  
-                        }
-                    }
-                });
+                    });
+                } 
+                else {
+                    alert("Anda berada di kantor, silakan pilih keterangan 'Presensi Kehadiran (dalam kantor)'");
+                    window.location.href = "absensi.html";
+                }    
             } 
             
             else{
@@ -85,33 +91,38 @@ function finalSend(){
         //jika diluar 
         else{
             if(radius =="nope"){
-                var date = new Date();
-                var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
-                console.log(timeStamp);
-
-                $.ajax({
-                    url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
-                    type: "POST",
-                    datatype:"json",
-                    crossDomain: true,
-                    data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi } ),
-                    cache:false,
-                    processData:false,
-
-                    success: function(result)
-                    {
-                        var error = result.error;
-                        if(error){
-                            console.log("gagal menyimpan data");
-                            console.log(result.error_msg);
-                            alert(result.error_msg);
+                if(hadir != "presensi"){
+                    var date = new Date();
+                    var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
+                    console.log(timeStamp);
+    
+                    $.ajax({
+                        url: "http://192.168.1.2/API_Basil_Revisi/absensi.php",
+                        type: "POST",
+                        datatype:"json",
+                        crossDomain: true,
+                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi } ),
+                        cache:false,
+                        processData:false,
+    
+                        success: function(result)
+                        {
+                            var error = result.error;
+                            if(error){
+                                console.log("gagal menyimpan data");
+                                console.log(result.error_msg);
+                                alert(result.error_msg);
+                            }
+                            else{
+                                console.log("Anda berhasil melakukan presensi");
+                                alert("Anda berhasil melakukan presensi");  
+                            }
                         }
-                        else{
-                            console.log("Anda berhasil melakukan presensi");
-                            alert("Anda berhasil melakukan presensi");  
-                        }
-                    }
-                });
+                    });
+                } else {
+                    alert("Anda tidak berada di kantor, silahkan pilih keterangan selain 'Presensi Kehadiran (dalam kantor)'");
+                    window.location.href = "absensi.html";
+                }     
             } 
 
             else{
@@ -128,26 +139,8 @@ function finalSend(){
 }
 
 function displayAll(){
-    console.log("hei hei");
+    console.log("display all");
     const uuiduser = sessionStorage.getItem('user_uuid');
-    // mydb.transaction(function (tx){
-    //     tx.executeSql('select * from presensi WHERE uuid_user = "'+uuiduser+ '"', [], function(tx, results){
-    //         var n = results.rows.length;
-    //         var s = '<table cellpadding ="2>" cellspacing="2" border="1" >';
-    //         s+= '<tr>'+'<th>'+"uuid_user"+'</th>'+'<th>'+"lokasi"+'</th>'+'<th>'+"kondisi"+'</th>'+'<th>'+"login_at"+'</th>'+'</tr>';
-    //         for(var i = 0; i<n; i++){
-    //             var hasil = results.rows.item(i);
-    //             s+='<tr>';
-    //             s+='<td>'+ hasil.uuid_user+'</td>';
-    //             s+='<td>'+ hasil.lokasi+'</td>';
-    //             s+='<td>'+ hasil.kondisi+'</td>';
-    //             s+='<td>'+ hasil.created_at+'</td>';
-    //             s+='</tr>';
-    //         }
-    //             s+='</table>';
-    //             document.getElementById('hasil').innerHTML = s;
-    //     });
-    // });
 
     $.ajax({
         url         : "http://192.168.1.2/API_Basil_Revisi/history.php",
@@ -156,24 +149,35 @@ function displayAll(){
         crossDomain: true,
         cache:false,
         processData:false,
-        success     : function(history_arr){
-            console.log(history_arr);
+        success     : function(result){
+            console.log(result);
             
-            //menghitung jumlah data orgs
-           const jmlData = history_arr["num"];
-            console.log(jmlData);
-            // buatSelect = "";
-            // // for(a = 0; a < jmlData; a++){
-            // //     //mencetak option baru
-            // //     buatSelect += result['data'][a] +" ";
-            // // }
-            
-            // document.getElementById("hasil").innerHTML += buatSelect ;
+            //menghitung jumlah data history
+           const jmlData = result["num"];
+           console.log(jmlData);
+
+           if(jmlData > 0){
+            var s = '<table cellpadding ="2>" cellspacing="2" border="1" >';
+            s+= '<tr>'+'<th>'+"uuid_user"+'</th>'+'<th>'+"lokasi"+'</th>'+'<th>'+"kondisi"+'</th>'+'<th>'+"login_at"+'</th>'+'</tr>';
+            for(var i = 0; i < jmlData; i++){
+                var hasil = result["records"][i];
+                 s+='<tr>';
+                 s+='<td>'+ hasil["keterangan"]+'</td>';
+                 s+='<td>'+ hasil["lokasi"]+'</td>';
+                 s+='<td>'+ hasil["is_in_office"]+'</td>';
+                 s+='<td>'+ hasil["created_at"]+'</td>';
+                 s+='</tr>';
+             }
+             
+             s+='</table>';
+             document.getElementById('hasil').innerHTML = s;
+           } else {
+            document.getElementById('hasil').innerHTML = "Anda belum memiliki history presensi"; 
+           }
+           
             
         }         
     });
-
-
 }
 
 
