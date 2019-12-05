@@ -156,20 +156,22 @@ function displayAll(){
             //menghitung jumlah data history
            const jmlData = result["num"];
            console.log(jmlData);
+           console.log(result["records"][1]["uuid_user"])
 
            if(jmlData > 0){
             var s = '<table cellpadding ="2>" cellspacing="2" border="1" >';
-            s+= '<tr>'+'<th>'+"uuid_user"+'</th>'+'<th>'+"lokasi"+'</th>'+'<th>'+"kondisi"+'</th>'+'<th>'+"login_at"+'</th>'+'</tr>';
+            s+= '<tr>'+'<th>'+"keterangan"+'</th>'+'<th>'+"lokasi"+'</th>'+'<th>'+"Di Kantor"+'</th>'+'<th>'+"Presensi Jam"+'</th>'+'</tr>';
             for(var i = 0; i < jmlData; i++){
                 var hasil = result["records"][i];
-                 s+='<tr>';
-                 s+='<td>'+ hasil["keterangan"]+'</td>';
-                 s+='<td>'+ hasil["lokasi"]+'</td>';
-                 s+='<td>'+ hasil["is_in_office"]+'</td>';
-                 s+='<td>'+ hasil["created_at"]+'</td>';
-                 s+='</tr>';
-             }
-             
+                if(hasil["uuid_user"] == uuiduser){
+                    s+='<tr>';
+                    s+='<td>'+ hasil["keterangan"]+'</td>';
+                    s+='<td>'+ hasil["lokasi"]+'</td>';
+                    s+='<td>'+ hasil["is_in_office"]+'</td>';
+                    s+='<td>'+ hasil["created_at"]+'</td>';
+                    s+='</tr>';
+                } 
+             } 
              s+='</table>';
              document.getElementById('hasil').innerHTML = s;
            } else {
