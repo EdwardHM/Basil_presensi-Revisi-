@@ -26,7 +26,6 @@ $(document).ready(function(){
                 }
                 else{
                     console.log("berhasil login");
-                    alert("berhasil login");
                     sessionStorage.setItem('username',result.user.nama);
                     sessionStorage.setItem('user_uuid', result.uid);
                     // lanjut ke halaman berikutnya

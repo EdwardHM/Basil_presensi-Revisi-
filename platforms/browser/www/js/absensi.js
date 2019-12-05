@@ -130,24 +130,50 @@ function finalSend(){
 function displayAll(){
     console.log("hei hei");
     const uuiduser = sessionStorage.getItem('user_uuid');
-    mydb.transaction(function (tx){
-        tx.executeSql('select * from presensi WHERE uuid_user = "'+uuiduser+ '"', [], function(tx, results){
-            var n = results.rows.length;
-            var s = '<table cellpadding ="2>" cellspacing="2" border="1" >';
-            s+= '<tr>'+'<th>'+"uuid_user"+'</th>'+'<th>'+"lokasi"+'</th>'+'<th>'+"kondisi"+'</th>'+'<th>'+"login_at"+'</th>'+'</tr>';
-            for(var i = 0; i<n; i++){
-                var hasil = results.rows.item(i);
-                s+='<tr>';
-                s+='<td>'+ hasil.uuid_user+'</td>';
-                s+='<td>'+ hasil.lokasi+'</td>';
-                s+='<td>'+ hasil.kondisi+'</td>';
-                s+='<td>'+ hasil.created_at+'</td>';
-                s+='</tr>';
-            }
-                s+='</table>';
-                document.getElementById('hasil').innerHTML = s;
-        });
+    // mydb.transaction(function (tx){
+    //     tx.executeSql('select * from presensi WHERE uuid_user = "'+uuiduser+ '"', [], function(tx, results){
+    //         var n = results.rows.length;
+    //         var s = '<table cellpadding ="2>" cellspacing="2" border="1" >';
+    //         s+= '<tr>'+'<th>'+"uuid_user"+'</th>'+'<th>'+"lokasi"+'</th>'+'<th>'+"kondisi"+'</th>'+'<th>'+"login_at"+'</th>'+'</tr>';
+    //         for(var i = 0; i<n; i++){
+    //             var hasil = results.rows.item(i);
+    //             s+='<tr>';
+    //             s+='<td>'+ hasil.uuid_user+'</td>';
+    //             s+='<td>'+ hasil.lokasi+'</td>';
+    //             s+='<td>'+ hasil.kondisi+'</td>';
+    //             s+='<td>'+ hasil.created_at+'</td>';
+    //             s+='</tr>';
+    //         }
+    //             s+='</table>';
+    //             document.getElementById('hasil').innerHTML = s;
+    //     });
+    // });
+
+    $.ajax({
+        url         : "http://192.168.1.2/API_Basil_Revisi/history.php",
+        type        : "GET",
+        dataType    : "json",
+        crossDomain: true,
+        cache:false,
+        processData:false,
+        success     : function(history_arr){
+            console.log(history_arr);
+            
+            //menghitung jumlah data orgs
+           const jmlData = history_arr["num"];
+            console.log(jmlData);
+            // buatSelect = "";
+            // // for(a = 0; a < jmlData; a++){
+            // //     //mencetak option baru
+            // //     buatSelect += result['data'][a] +" ";
+            // // }
+            
+            // document.getElementById("hasil").innerHTML += buatSelect ;
+            
+        }         
     });
+
+
 }
 
 
