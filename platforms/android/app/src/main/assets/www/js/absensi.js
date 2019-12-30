@@ -53,7 +53,7 @@ function finalSend(){
                     console.log(timeStamp);
 
                     $.ajax({
-                        url: "http://192.168.1.2/API_Basil_Revisi/absensi.php",
+                        url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
                         type: "POST",
                         datatype:"json",
                         crossDomain: true,
@@ -98,7 +98,7 @@ function finalSend(){
                     console.log(timeStamp);
     
                     $.ajax({
-                        url: "http://192.168.1.2/API_Basil_Revisi/absensi.php",
+                        url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
                         type: "POST",
                         datatype:"json",
                         crossDomain: true,
@@ -144,7 +144,7 @@ function displayAll(){
     const uuiduser = sessionStorage.getItem('user_uuid');
 
     $.ajax({
-        url         : "http://192.168.1.2/API_Basil_Revisi/history.php",
+        url         : "http://192.168.1.6/API_Basil_Revisi/history.php",
         type        : "GET",
         dataType    : "json",
         crossDomain: true,
