@@ -3,14 +3,13 @@ $(document).ready(function(){
     $("#download").click(function(event){
         const user = sessionStorage.getItem('user_uuid');  
         console.log(user);
-
         
         $.ajax({
             url: "http://192.168.1.6/MembuatPdf/index.php",
             type: "POST",
             datatype:"json",
             crossDomain: true,
-            data:JSON.stringify( { user_id:user } ),
+            data:JSON.stringify( { jabatan:null, cari:null, user_id:user } ),
             cache:false,
             processData:false,
 
@@ -24,7 +23,6 @@ $(document).ready(function(){
                 }
                 else{
                     console.log("terdownload");
-                    alert("Anda berhasil mendownload"); 
                     window.location.href = "http://192.168.1.6/MembuatPdf/FPDF/"+user+".pdf"; 
                 }
             }

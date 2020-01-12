@@ -42,15 +42,15 @@ function finalSend(){
         const user = sessionStorage.getItem('user_uuid'); 
         const hadir = sessionStorage.getItem('hadir');
         const office = sessionStorage.getItem('office');  
-        const lokasi = sessionStorage.getItem('lokasi')
+        const lokasi = sessionStorage.getItem('lokasi');
+        const validasi= "Belum Tervalidasi";;
 
         // jika di office
         if(is_in_office == "true"){
             if(radius == "ok"){
                 if(hadir = "presensi"){
                     var date = new Date();
-                    var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
-                    console.log(timeStamp);
+                    console.log(validasi);
 
                     $.ajax({
                         url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
@@ -94,15 +94,15 @@ function finalSend(){
             if(radius =="nope"){
                 if(hadir != "presensi"){
                     var date = new Date();
-                    var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
-                    console.log(timeStamp);
+                    // var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
+                    console.log(validasi);
     
                     $.ajax({
                         url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
                         type: "POST",
                         datatype:"json",
                         crossDomain: true,
-                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi } ),
+                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi} ),
                         cache:false,
                         processData:false,
     
@@ -156,11 +156,10 @@ function displayAll(){
             //menghitung jumlah data history
            const jmlData = result["num"];
            console.log(jmlData);
-           console.log(result["records"][1]["uuid_user"])
 
            if(jmlData > 0){
             var s = '<table cellpadding ="2>" cellspacing="2" border="1" >';
-            s+= '<tr>'+'<th>'+"keterangan"+'</th>'+'<th>'+"lokasi"+'</th>'+'<th>'+"Di Kantor"+'</th>'+'<th>'+"Presensi Jam"+'</th>'+'</tr>';
+            s+= '<tr>'+'<th>'+"keterangan"+'</th>'+'<th>'+"lokasi"+'</th>'+'<th>'+"Di Kantor"+'</th>'+'<th>'+"Presensi Jam"+'</th>'+'<th>'+"Status"+'</th>'+'</tr>';
             for(var i = 0; i < jmlData; i++){
                 var hasil = result["records"][i];
                 if(hasil["uuid_user"] == uuiduser){
@@ -169,13 +168,14 @@ function displayAll(){
                     s+='<td>'+ hasil["lokasi"]+'</td>';
                     s+='<td>'+ hasil["is_in_office"]+'</td>';
                     s+='<td>'+ hasil["created_at"]+'</td>';
+                    s+='<td>'+ hasil["status"]+'</td>';
                     s+='</tr>';
                 } 
              } 
-             s+='</table>';
-             document.getElementById('hasil').innerHTML = s;
+                s+='</table>';
+                document.getElementById('hasil').innerHTML = s;
            } else {
-            document.getElementById('hasil').innerHTML = "Anda belum memiliki history presensi"; 
+                document.getElementById('hasil').innerHTML = "Anda belum memiliki history presensi"; 
            }
            
             
