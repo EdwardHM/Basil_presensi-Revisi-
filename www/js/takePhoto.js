@@ -26,6 +26,7 @@ let app = {
         //konvert base64 string ke image
         document.getElementById('photo').src = "data:image/jpeg;base64," +imgURI;
         console.log(imgURI);
+        sessionStorage.setItem("img",imgURI);
     },
 
     //jika gagal

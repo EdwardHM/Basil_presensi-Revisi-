@@ -43,21 +43,20 @@ function finalSend(){
         const hadir = sessionStorage.getItem('hadir');
         const office = sessionStorage.getItem('office');  
         const lokasi = sessionStorage.getItem('lokasi');
-        const validasi= "Belum Tervalidasi";;
+        const image = sessionStorage.getItem('img'); 
 
         // jika di office
         if(is_in_office == "true"){
             if(radius == "ok"){
                 if(hadir = "presensi"){
                     var date = new Date();
-                    console.log(validasi);
 
                     $.ajax({
                         url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
                         type: "POST",
                         datatype:"json",
                         crossDomain: true,
-                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi} ),
+                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi, gambar:image } ),
                         cache:false,
                         processData:false,
 
@@ -95,14 +94,13 @@ function finalSend(){
                 if(hadir != "presensi"){
                     var date = new Date();
                     // var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
-                    console.log(validasi);
     
                     $.ajax({
                         url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
                         type: "POST",
                         datatype:"json",
                         crossDomain: true,
-                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi} ),
+                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi, gambar:image } ),
                         cache:false,
                         processData:false,
     
