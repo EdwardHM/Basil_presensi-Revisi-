@@ -12,18 +12,18 @@
                 //  Get latitiude & longitude Position berdasarkan location
                  var lat_send =position.coords.latitude;
                  var long_send =position.coords.longitude;
-                 console.log("lat",position.coords.latitude);
-                 console.log(position.coords.longitude);
-                 sessionStorage.setItem('lat', lat_send);   
-                 sessionStorage.setItem('long', long_send);
+                 console.log("lat",lat_send);
+                 console.log(long_send);
+                //  sessionStorage.setItem('lat', lat_send);   
+                //  sessionStorage.setItem('long', long_send);
 
                  var radius_bumi = parseFloat("6372.795477598");
                  var lat_tujuan = parseFloat("-7.95853"); //vernon office
                  var long_tujuan = parseFloat("112.6374568");
-                 var lat_send =position.coords.latitude;//-7.9580384 
-                 var long_send =position.coords.longitude;//112.6378245
-                 console.log(position.coords.latitude);
-                 console.log(position.coords.longitude);
+                //  var lat_send =position.coords.latitude;-7.9580384 
+                //  var long_send =position.coords.longitude; 112.6378245
+                //  console.log(position.coords.latitude);
+                //  console.log(position.coords.longitude);
               
                  var del_lat = lat_send - lat_tujuan;
                  var del_long = long_send - long_tujuan;
@@ -66,7 +66,7 @@
                         sessionStorage.setItem('radius',status)
                     }
               
-                var latlng = position.coords.latitude+","+position.coords.longitude;
+                var latlng = lat_send+","+long_send;
 
                     // konversi kan ke alamat lokasi
                     var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +latlng+ "&key=AIzaSyDhGU-wSjC89hoHPStx7bYGOjHpULJQHGI";

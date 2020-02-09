@@ -28,6 +28,7 @@ $(document).ready(function(){
                     console.log("berhasil login");
                     sessionStorage.setItem('username',result.user.nama);
                     sessionStorage.setItem('user_uuid', result.uid);
+                    sessionStorage.setItem('phone', result.user.phone)
                     // lanjut ke halaman berikutnya
                     window.location.href = "absensi.html";
                 }

@@ -123,78 +123,78 @@
 // alert('Failed because ini: ' + message);
 
 // }
-let app = {
-    init: function(){
-        document.getElementById('btn').addEventListener('click', app.takephoto);
-    },
-    takephoto: function(){
-        let opts = {
-            quality: 80,
-            destinationType: Camera.DestinationType.DATA_URL,
-            sourceType: Camera.PictureSourceType.CAMERA,
-            mediaType: Camera.MediaType.PICTURE,
-            encodingType: Camera.EncodingType.JPEG,
-            cameraDirection: 1,
-            targetWidth: 300,
-            targetHeight: 400
+// let app = {
+//     init: function(){
+//         document.getElementById('btn').addEventListener('click', app.takephoto);
+//     },
+//     takephoto: function(){
+//         let opts = {
+//             quality: 80,
+//             destinationType: Camera.DestinationType.DATA_URL,
+//             sourceType: Camera.PictureSourceType.CAMERA,
+//             mediaType: Camera.MediaType.PICTURE,
+//             encodingType: Camera.EncodingType.JPEG,
+//             cameraDirection: 1,
+//             targetWidth: 300,
+//             targetHeight: 400
         
-        };
+//         };
         
-        navigator.camera.getPicture(app.ftw, app.wta, opts);
-    },
+//         navigator.camera.getPicture(app.ftw, app.wta, opts);
+//     },
 
     //jika sukses
-    ftw: function(imgURI){
+    // ftw: function(imgURI){
         //  alert(imgURI);
-        sessionStorage.setItem('image', imgURI);
+        // sessionStorage.setItem('image', imgURI);
         // document.getElementById('msg').textContent = imgURI;
         //konvert base64 string ke image
-        document.getElementById('photo').src = "data:image/jpeg;base64," +imgURI;
-        console.log(imgURI);
-        sessionStorage.setItem("img",imgURI);
-    },
+    //     document.getElementById('photo').src = "data:image/jpeg;base64," +imgURI;
+    //     console.log(imgURI);
+    //     sessionStorage.setItem("img",imgURI);
+    // },
 
     //jika gagal
-    wta: function(msg){
-        document.getElementById('msg').textContent = "Fail to Access The Camera";
-    }
-};
+//     wta: function(msg){
+//         document.getElementById('msg').textContent = "Fail to Access The Camera";
+//     }
+// };
 
 //mengecek device ready / tidak
-document.addEventListener('deviceready', app.init);
+// document.addEventListener('deviceready', app.init);
 
 
-function finalSend(){
-    console.log("sdh disini")
-    try{
-        const image = sessionStorage.getItem('img'); 
-        $.ajax({
-            url: "http://192.168.1.6/upload/upload.php",
-            type: "POST",
-            datatype:"json",
-            crossDomain: true,
-            data:JSON.stringify( { gambar:image } ),
-            cache:false,
-            processData:false,
+// function finalSend(){
+//     console.log("sdh disini")
+//     try{
+//         const image = sessionStorage.getItem('img'); 
+//         $.ajax({
+//             url: "http://192.168.1.6/upload/upload.php",
+//             type: "POST",
+//             datatype:"json",
+//             crossDomain: true,
+//             data:JSON.stringify( { gambar:image } ),
+//             cache:false,
+//             processData:false,
 
-            success: function(result)
-            {
-                var error = result.error;
-                if(error){
-                    console.log("gagal menyimpan data");
-                    console.log(result.error_msg);
-                    alert(result.error_msg);
-                }
-                else{
-                    console.log("Anda berhasil melakukan presensi");
-                    alert("Anda berhasil melakukan presensi");  
-                }
-            }
-        });
+//             success: function(result)
+//             {
+//                 var error = result.error;
+//                 if(error){
+//                     console.log("gagal menyimpan data");
+//                     console.log(result.error_msg);
+//                     alert(result.error_msg);
+//                 }
+//                 else{
+//                     console.log("Anda berhasil melakukan presensi");
+//                     alert("Anda berhasil melakukan presensi");  
+//                 }
+//             }
+//         });
 
-    } 
-    catch(err){
-        alert("Gagal menyimpan data !");
-    }
+//     } 
+//     catch(err){
+//         alert("Gagal menyimpan data !");
+//     }
         
-}
+// }
