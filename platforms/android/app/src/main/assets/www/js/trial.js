@@ -27,7 +27,8 @@ $(document).ready(function(){
                 if(error){
                     console.log("gagal register");
                     console.log(result.error_msg);
-                    $('#errormessage_reg').html(result.error_msg);
+                    // $('#errormessage_reg').html(result.error_msg);
+                    alert(result.error_msg)
                 }
                 else{
                     console.log("berhasil register");

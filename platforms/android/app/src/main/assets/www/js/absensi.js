@@ -48,32 +48,36 @@ function finalSend(){
         // jika di office
         if(is_in_office == "true"){
             if(radius == "ok"){
-                if(hadir = "presensi"){
-                    var date = new Date();
-
-                    $.ajax({
-                        url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
-                        type: "POST",
-                        datatype:"json",
-                        crossDomain: true,
-                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi, gambar:image } ),
-                        cache:false,
-                        processData:false,
-
-                        success: function(result)
-                        {
-                            var error = result.error;
-                            if(error){
-                                console.log("gagal menyimpan data");
-                                console.log(result.error_msg);
-                                alert(result.error_msg);
+                if(hadir == "presensi"){
+                    if(image != null){
+                        $.ajax({
+                            url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
+                            type: "POST",
+                            datatype:"json",
+                            crossDomain: true,
+                            data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi, gambar:image } ),
+                            cache:false,
+                            processData:false,
+    
+                            success: function(result)
+                            {
+                                var error = result.error;
+                                if(error){
+                                    console.log("gagal menyimpan data");
+                                    console.log(result.error_msg);
+                                    alert(result.error_msg);
+                                }
+                                else{
+                                    console.log("Anda berhasil melakukan presensi");
+                                    alert("Anda berhasil melakukan presensi");  
+                                }
                             }
-                            else{
-                                console.log("Anda berhasil melakukan presensi");
-                                alert("Anda berhasil melakukan presensi");  
-                            }
-                        }
-                    });
+                        });
+                    }
+                    else{
+                        alert("Jangan Lupa Selfie Wajah Yang Kece Dulu Dong");
+                        window.location.href = "absensi.html";
+                    }
                 } 
                 else {
                     alert("Anda berada di kantor, silakan pilih keterangan 'Presensi Kehadiran (dalam kantor)'");
@@ -92,32 +96,38 @@ function finalSend(){
         else{
             if(radius =="nope"){
                 if(hadir != "presensi"){
-                    var date = new Date();
-                    // var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
-    
-                    $.ajax({
-                        url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
-                        type: "POST",
-                        datatype:"json",
-                        crossDomain: true,
-                        data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi, gambar:image } ),
-                        cache:false,
-                        processData:false,
-    
-                        success: function(result)
-                        {
-                            var error = result.error;
-                            if(error){
-                                console.log("gagal menyimpan data");
-                                console.log(result.error_msg);
-                                alert(result.error_msg);
+                    if(image != null){
+                        var date = new Date();
+                        // var timeStamp= date.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2');
+        
+                        $.ajax({
+                            url: "http://192.168.1.6/API_Basil_Revisi/absensi.php",
+                            type: "POST",
+                            datatype:"json",
+                            crossDomain: true,
+                            data:JSON.stringify( { user_id:user, keterangan:hadir , is_in_office:office, lokasi:lokasi, gambar:image } ),
+                            cache:false,
+                            processData:false,
+        
+                            success: function(result)
+                            {
+                                var error = result.error;
+                                if(error){
+                                    console.log("gagal menyimpan data");
+                                    console.log(result.error_msg);
+                                    alert(result.error_msg);
+                                }
+                                else{
+                                    console.log("Anda berhasil melakukan presensi");
+                                    alert("Anda berhasil melakukan presensi");  
+                                }
                             }
-                            else{
-                                console.log("Anda berhasil melakukan presensi");
-                                alert("Anda berhasil melakukan presensi");  
-                            }
-                        }
-                    });
+                        });
+                    }
+                    else{
+                        alert("Jangan Lupa Selfie Wajah Yang Kece Dulu Dong");
+                        window.location.href = "absensi.html";
+                    }
                 } else {
                     alert("Anda tidak berada di kantor, silahkan pilih keterangan selain 'Presensi Kehadiran (dalam kantor)'");
                     window.location.href = "absensi.html";

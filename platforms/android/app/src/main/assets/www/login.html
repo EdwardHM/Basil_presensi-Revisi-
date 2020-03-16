@@ -37,7 +37,7 @@
             <form id="formLogin">
                     <div class="form-group">
                         <input type="text" name="username" id="username" class="form-control" style="border: none;border-bottom: solid 1px rgba(0,0,0,.3);background:#fafafa;   outline: none !important;"  required>
-                        <label class="form-control-placeholder" for="username"><i class="fa fa-user-circle" style="font-size:20px">Phone Number</i></label>
+                        <label class="form-control-placeholder" for="username"><i class="fa fa-user-circle" style="font-size:20px">No. Telepon</i></label>
                     </div>
                     
                     <br/>
@@ -62,6 +62,14 @@
 
         <!--script ke API Login-->
         <script type="text/javascript" src="js/LoginAPI.js"></script>  
+
+          <!--masking phone  -->
+        <script type="text/javascript">
+            document.getElementById('username').addEventListener('input', function (e) {
+               var x = e.target.value.replace(/\D/g, '').match(/(\d{0,4})(\d{0,4})(\d{0,4})/);
+               e.target.value = !x[2] ? x[1] :  x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
+           });
+           </script>
 
     </body>
 </html>

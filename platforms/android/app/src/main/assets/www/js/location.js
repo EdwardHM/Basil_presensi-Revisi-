@@ -18,8 +18,8 @@
                 //  sessionStorage.setItem('long', long_send);
 
                  var radius_bumi = parseFloat("6372.795477598");
-                 var lat_tujuan = parseFloat("-7.95853"); //vernon office
-                 var long_tujuan = parseFloat("112.6374568");
+                 var lat_tujuan = parseFloat("-7.966668"); //vernon office
+                 var long_tujuan = parseFloat("112.669657");
                 //  var lat_send =position.coords.latitude;-7.9580384 
                 //  var long_send =position.coords.longitude; 112.6378245
                 //  console.log(position.coords.latitude);

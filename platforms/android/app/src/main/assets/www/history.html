@@ -25,8 +25,8 @@
         <div class="topnav" id="myTopnav">
             <a href="history.html"class="active">History</a>
             <a href="absensi.html">Home</a>
-            <a href="#">profile</a>
-            <a href="#" onclick="logOut()">Log-Out</a>
+            <a href="profile.html">profile</a>
+            <a href="#" onclick="logOut()">Sign-Out</a>
             <a href="javascript:void(0);" class="icon" onclick="responsive()">
               <i class="fa fa-bars"></i>
             </a>
@@ -34,16 +34,20 @@
 
         <div class="container-fluid">
 
-            <h4>Data Yang Telah Diinput</h4>
+            <h4 style="text-align: center;">Data Yang Telah Diinput</h4>
+            <!-- <button name="download" id="download" name="download" class="btn btn-info"> Open AS PDF</button>  -->
+            <button name="download" id="download" name="download" type="button" class="btn btn-info" style=" margin-bottom: 20px; margin-top: 20px;" id="cetak">
+              <i class="fa fa-file-pdf-o" style="font-size:25px;"></i> Open AS PDF
+            </button> 
             <div id="hasil">
              
             </div>
         </div>
 
-        <div style="text-align: center;">
+        <!-- <div style="text-align: center;"> -->
           <!-- <a href="http://192.168.1.6/Membuat pdf/index.php" class="btn btn-info">download</a> -->
-          <button name="download" id="download" name="download" class="btn btn-info"> Open AS PDF</button>  
-        </div>
+          <!-- <button name="download" id="download" name="download" class="btn btn-info"> Open AS PDF</button>  
+        </div> -->
 
         <!--script ke API Absensi -->
         <script type="text/javascript" src="js/absensi.js"></script>
