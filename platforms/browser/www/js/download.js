@@ -18,21 +18,21 @@ $(document).ready(function(){
     }
 
 
-    var select = document.getElementById('cetak-kapan');
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = date.getMonth()+1;
-    var bulan_tahun = month+"-"+year;
-    for (var i = year - 4; i <= year + 3; i++) {
-        for(var count = 0; count < 12; count++){
-            var option = document.createElement('option');
-            option.value = option.innerHTML = count+1+"-"+i;
-            if(count+1+"-"+i == bulan_tahun) option.setAttribute('selected',true);
-            select.appendChild(option);
-        }
+    // var select = document.getElementById('cetak-kapan');
+    // var date = new Date();
+    // var year = date.getFullYear();
+    // var month = date.getMonth()+1;
+    // var bulan_tahun = month+"-"+year;
+    // for (var i = year - 4; i <= year + 3; i++) {
+    //     for(var count = 0; count < 12; count++){
+    //         var option = document.createElement('option');
+    //         option.value = option.innerHTML = count+1+"-"+i;
+    //         if(count+1+"-"+i == bulan_tahun) option.setAttribute('selected',true);
+    //         select.appendChild(option);
+    //     }
 
-    }
-    select.innerHTML += option
+    // }
+    // select.innerHTML += option
 
 
     console.log("Ajax Login ready");
@@ -40,11 +40,12 @@ $(document).ready(function(){
         const user = sessionStorage.getItem('user_uuid');  
         console.log(user);
         var kapan = document.getElementById("cetak-kapan").value;
-        var bulan_cetak = kapan.substring(0,1);
-        var tahun_cetak = kapan.substring(2,6);
+        var pisah = kapan.toString().split("-")
+        var bulan_cetak = pisah[0];
+        var tahun_cetak = pisah[1];
         
         $.ajax({
-            url: "http://192.168.1.6/MembuatPdf/index.php",
+            url: "http://192.168.1.7/MembuatPdf/index.php",
             type: "POST",
             datatype:"json",
             crossDomain: true,
@@ -62,7 +63,7 @@ $(document).ready(function(){
                 }
                 else{
                     console.log("terdownload");
-                    window.location.href = "http://192.168.1.6/MembuatPdf/FPDF/"+user+".pdf"; 
+                    window.location.href = "http://192.168.1.7/MembuatPdf/FPDF/"+user+".pdf"; 
                 }
             }
         });
@@ -72,5 +73,5 @@ $(document).ready(function(){
 
 // function openpdf(){
 //     const user = sessionStorage.getItem('user_uuid'); 
-//     window.location.href = "http://192.168.1.6/MembuatPdf/FPDF/"+user+".pdf";
+//     window.location.href = "http://192.168.1.7/MembuatPdf/FPDF/"+user+".pdf";
 // }

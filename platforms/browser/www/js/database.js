@@ -97,7 +97,7 @@
 
 // ft = new FileTransfer();
 
-// ft.upload(imageURI, "http://192.168.1.6/upload/", success, fail, options);
+// ft.upload(imageURI, "http://192.168.1.7/upload/", success, fail, options);
 
 // }
 
@@ -169,7 +169,7 @@
 //     try{
 //         const image = sessionStorage.getItem('img'); 
 //         $.ajax({
-//             url: "http://192.168.1.6/upload/upload.php",
+//             url: "http://192.168.1.7/upload/upload.php",
 //             type: "POST",
 //             datatype:"json",
 //             crossDomain: true,

@@ -76,7 +76,7 @@ function changePass(){
    }
    else{
        $.ajax({
-           url: "http://192.168.1.6/API_Basil_Revisi/update_user.php",
+           url: "http://192.168.1.7/API_Basil_Revisi/update_user.php",
            type: "POST",
            datatype:"json",
            crossDomain: true,
@@ -107,34 +107,38 @@ function changePass(){
 function changeProf(){
    var telpBaru = document.getElementById("telpBaru").value;
    var user =     sessionStorage.getItem('user_uuid');
-   if(telpBaru != null){
-       $.ajax({
-           url: "http://192.168.1.6/API_Basil_Revisi/update_profile.php",
-           type: "POST",
-           datatype:"json",
-           crossDomain: true,
-           data:JSON.stringify( { nama_Baru:null, telp_baru:telpBaru, user_id:user } ),
-           cache:false,
-           processData:false,
+   console.log(telpBaru);
+   if(telpBaru == null){
+      alert("Telepon Tidak Boleh Kosong !");
+  }
+  else{
+   $.ajax({
+      url: "http://192.168.1.7/API_Basil_Revisi/update_profile.php",
+      type: "POST",
+      datatype:"json",
+      crossDomain: true,
+      data:JSON.stringify( { namaBaru:null, telp_baru:telpBaru, user_id:user } ),
+      cache:false,
+      processData:false,
 
-           success: function(result)
-           {
-               var error = result.error;
-               if(error){
-                   console.log("gagal");
-                   console.log(result.error_msg);
-                   alert(result.error_msg);
-               }
-               else{
-                   alert("Berhasil Memperbarui Telepon!");
-                   window.location.href = "profile.html";
-               }
-           }
-       });
-       return false;
-   } else{
-      alert("No. Telepon Tidak Boleh Kosong !");
-   }
+      success: function(result)
+      {
+          var error = result.error;
+          if(error){
+              console.log("gagal");
+              console.log(result.error_msg);
+              alert(result.error_msg);
+          }
+          else{
+              alert("Berhasil Memperbarui telepon!");
+              window.location.href = "profile.html";
+          }
+      }
+  });
+  return false;
+     
+  
+   } 
 }
 
 
@@ -145,13 +149,13 @@ function cobaProf(){
    var user =     sessionStorage.getItem('user_uuid');
   console.log(namaBaru);
 
-  if(namaBaru != ""){
+  if(namaBaru != null){
       $.ajax({
-         url: "http://192.168.1.6/API_Basil_Revisi/update_profile.php",
+         url: "http://192.168.1.7/API_Basil_Revisi/update_profile.php",
          type: "POST",
          datatype:"json",
          crossDomain: true,
-         data:JSON.stringify( { "nama_Baru":namaBaru, "telp_baru":"", "user_id":user } ),
+         data:JSON.stringify( { "nama_Baru":namaBaru, "telp_baru":null, "user_id":user } ),
          cache:false,
          processData:false,
 
@@ -176,10 +180,7 @@ function cobaProf(){
                  alert("Berhasil Memperbarui Nama!");
                  window.location.href = "profile.html";
          }
-
-
      });
-      alert(namaBaru);
   }
   else{
       alert("Nama Tidak Boleh Kosong !");
